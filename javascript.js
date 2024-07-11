@@ -1,25 +1,36 @@
 const myLibrary = [];
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this._read = read;
+    }
 
-    this.info = function () {
-        if (this.read) {
-            return this.title + " by " + this.author + ", " + pages + " pages, read."
+    get info() {
+        if (this._read) {
+            return this.title + " by " + this.author + ", " + this.pages + " pages, read."
         }
         else {
-            return this.title + " by " + this.author + ", " + pages + " pages, not read yet."
+            return this.title + " by " + this.author + ", " + this.pages + " pages, not read yet."
         }
     }
+
+    get read() {
+        return this._read;
+    }
+
+    set read(value) {
+        this._read = value;
+    }
+
 };
 
 function addBookToLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
-    console.log(newBook.info());
+    console.log(newBook.info);
     displayLibrary();
 };
 
@@ -35,7 +46,7 @@ function displayLibrary() {
         const newDiv = document.createElement("div");
         libraryDiv.appendChild(newDiv);
         newDiv.appendChild(newPar);
-        newPar.textContent = book.info();
+        newPar.textContent = book.info;
 
         const removeBtn = document.createElement("button");
         newDiv.appendChild(removeBtn);
